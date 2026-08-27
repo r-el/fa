@@ -1,0 +1,4 @@
+[submodule "server"]
+	path = server
+	url = git@github.com:r-el/fa-server.git
+	branch = master
