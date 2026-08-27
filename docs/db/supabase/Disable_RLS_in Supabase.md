@@ -1,0 +1,1 @@
+Go to Projects -> YOUR PROJECT -> database -> Policies and press "Disable RLS" button on your tables.
