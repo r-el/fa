@@ -1,8 +1,8 @@
 [submodule "server"]
 	path = server
-	url = git@github.com:r-el/fa-server.git
+	url = https://github.com/r-el/fa-server.git
 	branch = master
 [submodule "client"]
 	path = client
-	url = git@github.com:r-el/fa-client.git
+	url = https://github.com/r-el/fa-client.git
 	branch = master
