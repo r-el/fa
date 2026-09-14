@@ -78,19 +78,19 @@ The app names in GitHub secrets should match exactly with the Heroku app names:
 
 ```bash
 # Test API deployment
-cd fs-dashboard/server
+cd fa-server
 heroku git:remote -a your-api-app-name
 git add .
 git commit -m "test deploy"
-git push heroku main
+git push heroku HEAD:main
 
 # Test Frontend deployment
-cd ../client
+cd ../fa-client
 heroku git:remote -a your-frontend-app-name
 npm run build
 git add .
 git commit -m "test deploy"
-git push heroku main
+git push heroku HEAD:main
 ```
 
 ## Verification
