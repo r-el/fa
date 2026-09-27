@@ -1,4 +1,4 @@
-# FaceAlert + Specter deployment
+# Specter deployment
 
 Updated 2026-09-25. This describes the current server architecture and deployment wiring,
 not a completed production acceptance test. The client integration is implemented and

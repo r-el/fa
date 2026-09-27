@@ -2,7 +2,7 @@
 
 ## Overview
 
-This API provides authentication, user management, camera management, and Specter integration services for the Face Alert Dashboard system.
+This API provides authentication, user management, camera management, and Specter integration services for the Specter Dashboard system.
 
 ## Available API Documentation
 
@@ -213,7 +213,7 @@ Authorization: Bearer <your-jwt-token>
 ```json
 {
   "success": true,
-  "message": "Welcome to FaceAlert Server!"
+  "message": "Welcome to Specter Server!"
 }
 ```
 

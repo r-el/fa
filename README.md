@@ -1,4 +1,4 @@
-# FaceAlert
+# Specter
 
 The project is split into separate repositories:
 
