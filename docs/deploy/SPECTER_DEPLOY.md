@@ -18,8 +18,6 @@ locally tested; real-camera and deployed acceptance remain pending. See the
   rooms. Alerts are read and changed through Specter's HTTP API; no MongoDB alert copy
   or durable fa alert-ingestion backlog is maintained. After downtime, refetch HTTP
   state. Camera status consumers start with the last status per subject.
-- MongoDB and MinIO remain in fa's Compose stack for existing/legacy functionality;
-  their presence does not make them authoritative for Specter resources.
 
 ## Compose wiring
 
@@ -31,7 +29,7 @@ Starting only the base file does not start the Specter API or vision processes.
 
 The [fa-server Compose file](../../server/docker-compose.yml) attaches only fa-server
 to the external `${SPECTER_NETWORK:-specter_default}` network. It also explicitly
-retains its own `default` network, where `mongo` and `minio` remain reachable.
+retains its own `default` network for fa-local services.
 Use separate Compose projects; do not merge the fa file into Specter's project.
 
 | Setting | Container value / operator requirement |
@@ -66,14 +64,10 @@ build variables. The following variables must be present and nonempty for Compos
 | `JWT_SECRET` | Strong signing secret for fa authentication and live tickets; no default |
 | `SUPABASE_URL` | URL of the provisioned Supabase project |
 | `SUPABASE_KEY` | Server-side key authorized for the existing users/assignment schema; never sent to browsers |
-| `MINIO_ACCESS_KEY` | Existing MinIO credential or newly provisioned root username for this local stack |
-| `MINIO_SECRET_KEY` | Matching strong MinIO secret; used by both server and MinIO |
 
 The exact Supabase key variable is `SUPABASE_KEY`, not an invented
 `SUPABASE_SERVICE_ROLE_KEY`. Provision the existing user/assignment schema and access
 policies; do not apply the superseded organizations/camera-mapping migration.
-Keep existing MinIO credentials when reusing its data unless deliberately rotating them.
-Required interpolation replaces the old hardcoded MinIO development credentials.
 
 Set `ALLOWED_ORIGINS` to the public frontend's exact HTTPS origin (or comma-separated
 origins without surrounding spaces). The Compose default `http://localhost:5173` is
@@ -94,7 +88,6 @@ these optional settings need an explicit Compose override to reach the container
 4. Deploy the Specter project first. Its migrations, API, NATS, camera manager and
    detector must be ready; the external network must already exist before fa starts.
 5. Build/deploy fa-server as its own Compose project, retaining its default network.
-   Cross-project readiness is not covered by fa's MongoDB/MinIO `depends_on` entries.
    Verify API access and NATS connectivity, not merely that the process listens.
 6. Deploy the frontend separately. The current server Dockerfile does not build or copy
    the client. Same-origin hosting through a reverse proxy is recommended; optional
@@ -129,9 +122,8 @@ these optional settings need an explicit Compose override to reach the container
 
 ## Production boundaries and pending acceptance
 
-The supplied fa stack still publishes MongoDB and MinIO ports and has no TLS ingress;
-MongoDB is not configured with authentication here. Restrict these ports to a trusted
-host/network or use a hardened deployment override before production. Do not expose
+The supplied fa stack has no TLS ingress. Use a hardened deployment override before
+production. Do not expose
 Specter/NATS/go2rtc administration to browsers or the public internet. This deployment
 wiring is not a complete production-hardening change.
 
