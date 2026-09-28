@@ -4,7 +4,7 @@
   "values": [
     {
       "key": "baseUrl",
-      "value": "https://api.facealert.live",
+      "value": "https://api.specter.live",
       "type": "default",
       "enabled": true
     },

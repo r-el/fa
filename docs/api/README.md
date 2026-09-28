@@ -2,12 +2,11 @@
 
 ## Overview
 
-This API provides authentication, user management, camera management, and MongoDB integration services for the Face Alert Dashboard system.
+This API provides authentication, user management, camera management, and Specter integration services for the Specter Dashboard system.
 
 ## Available API Documentation
 
 - **[Camera Management API](./camera-api-documentation.md)** - Complete documentation for camera CRUD operations and user assignments
-- **[MongoDB API](./MONGODB_API.md)** - MongoDB GridFS integration for persons and alerts data
 - **[Authentication & User Management](#user-authentication)** - User registration, login, and role management
 
 ## Quick Fixes
@@ -15,13 +14,6 @@ This API provides authentication, user management, camera management, and MongoD
 - **[Heroku Deployment Issues](../deploy/HEROKU_TROUBLESHOOTING.md)** - Fix "Invalid credentials" and deployment failures
 
 ## Postman Collections
-
-### MongoDB API Collection
-
-Import the following files into Postman to test the MongoDB API:
-
-- **Collection**: `mongodb-api-collection.json`
-- **Environment**: `mongodb-api-environment.json`
 
 ### Camera API Collection
 
@@ -61,7 +53,7 @@ http://localhost:3000
 ### Production
 
 ```
-https://api.facealert.live
+https://api.specter.live
 ```
 
 ## Authentication
@@ -221,7 +213,7 @@ Authorization: Bearer <your-jwt-token>
 ```json
 {
   "success": true,
-  "message": "Welcome to FaceAlert Server!"
+  "message": "Welcome to Specter Server!"
 }
 ```
 
@@ -252,7 +244,7 @@ Import the provided Postman collection and environment files:
 
 - `postman-collection.json` - API endpoints
 - `postman-environment.json` - Development environment (localhost:3000)
-- `postman-environment-production.json` - Production environment (api.facealert.live)
+- `postman-environment-production.json` - Production environment (api.specter.live)
 
 ### Usage with Postman
 
@@ -266,7 +258,7 @@ Import the provided Postman collection and environment files:
 
 ### Testing Production
 
-To test the production API at `https://api.facealert.live`:
+To test the production API at `https://api.specter.live`:
 
 1. Select the "FS Dashboard Production" environment in Postman
 2. Use the same endpoints as in development
@@ -307,18 +299,18 @@ curl -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   http://localhost:3000/users/profile
 ```
 
-### Production (api.facealert.live)
+### Production (api.specter.live)
 
 ### 1. Test production health
 
 ```bash
-curl https://api.facealert.live/health
+curl https://api.specter.live/health
 ```
 
 ### 2. Register on production
 
 ```bash
-curl -X POST https://api.facealert.live/auth/register \
+curl -X POST https://api.specter.live/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "produser",
@@ -331,7 +323,7 @@ curl -X POST https://api.facealert.live/auth/register \
 ### 3. Login on production
 
 ```bash
-curl -X POST https://api.facealert.live/auth/login \
+curl -X POST https://api.specter.live/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "produser",
