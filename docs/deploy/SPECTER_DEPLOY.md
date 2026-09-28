@@ -37,7 +37,7 @@ Use separate Compose projects; do not merge the fa file into Specter's project.
 | `SPECTER_API_URL` | `http://api:8000` (not container localhost or `specter-api`) |
 | `SPECTER_NATS_URL` | `nats://nats:4222` (not `NATS_URL`) |
 | `QDRANT_URL` | `http://qdrant:6333` for fa's existing vector diagnostics |
-| `SPECTER_OWNER_ID` | Defaults to `facealert`; only lowercase letters, digits and underscores |
+| `SPECTER_OWNER_ID` | Defaults to `specter`; only lowercase letters, digits and underscores |
 | `SPECTER_NETWORK` | Compose network name; override if Specter uses a different project name |
 | `SPECTER_API_TOKEN_FILE` | `/run/secrets/specter_api_token` |
 | `NODE_ENV` | Defaults to `production` |

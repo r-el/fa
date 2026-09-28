@@ -19,16 +19,16 @@ heroku auth:whoami
 #### Create new apps at eu region
 
 ```bash
-heroku create facealert-api --region eu
-heroku create facealert-frontend --region eu
+heroku create specter-api --region eu
+heroku create specter-frontend --region eu
 ```
 
 #### Add custom domains
 
 ```bash
-heroku domains:add api.facealert.live -a facealert-api
-heroku domains:add api.facealert.live -a facealert-api
-heroku domains:add www.facealert.live -a facealert-frontend
+heroku domains:add api.specter.live -a specter-api
+heroku domains:add api.specter.live -a specter-api
+heroku domains:add www.specter.live -a specter-frontend
 ```
 
 #### Set production environment variables
@@ -37,22 +37,22 @@ heroku domains:add www.facealert.live -a facealert-frontend
 
 ```bash
 # Basic environment
-heroku config:set NODE_ENV=production -a facealert-api
+heroku config:set NODE_ENV=production -a specter-api
 
 # CORS settings
-heroku config:set ALLOWED_ORIGINS=https://facealert.live,https://www.facealert.live -a facealert-api
+heroku config:set ALLOWED_ORIGINS=https://specter.live,https://www.specter.live -a specter-api
 
 # Authentication settings
-heroku config:set JWT_SECRET=your-super-secret-jwt-key-here -a facealert-api
-heroku config:set BCRYPT_SALT_ROUNDS=10 -a facealert-api
+heroku config:set JWT_SECRET=your-super-secret-jwt-key-here -a specter-api
+heroku config:set BCRYPT_SALT_ROUNDS=10 -a specter-api
 
 # Supabase configuration (REQUIRED)
-heroku config:set SUPABASE_URL=your-supabase-project-url -a facealert-api
-heroku config:set SUPABASE_KEY=your-supabase-anon-key -a facealert-api
+heroku config:set SUPABASE_URL=your-supabase-project-url -a specter-api
+heroku config:set SUPABASE_KEY=your-supabase-anon-key -a specter-api
 
 
 # Server settings
-heroku config:set PORT=3000 -a facealert-api
+heroku config:set PORT=3000 -a specter-api
 ```
 
 **Important Notes:**
@@ -64,28 +64,28 @@ heroku config:set PORT=3000 -a facealert-api
 ##### For client
 
 ```bash
-heroku config:set NODE_ENV=production -a facealert-frontend
-heroku config:set REACT_APP_API_URL=https://api.facealert.live -a facealert-frontend
+heroku config:set NODE_ENV=production -a specter-frontend
+heroku config:set REACT_APP_API_URL=https://api.specter.live -a specter-frontend
 ```
 
 #### Enable SSL certificates
 
 ```bash
 # Enable automatic SSL for API
-heroku certs:auto:enable -a facealert-api
+heroku certs:auto:enable -a specter-api
 
 # Enable automatic SSL for frontend  
-heroku certs:auto:enable -a facealert-frontend
+heroku certs:auto:enable -a specter-frontend
 ```
 
 #### Verify SSL status
 
 ```bash
 # Check API SSL
-heroku certs -a facealert-api
+heroku certs -a specter-api
 
 # Check frontend SSL
-heroku certs -a facealert-frontend
+heroku certs -a specter-frontend
 ```
 
 #### DNS information
@@ -95,13 +95,13 @@ heroku certs -a facealert-frontend
 ###### DNS for server
 
 ```bash
-heroku domains -a facealert-api
+heroku domains -a specter-api
 ```
 
 ###### DNS for client
 
 ```bash
-heroku domains -a facealert-frontend
+heroku domains -a specter-frontend
 ```
 
 #### Add Heroku remotes to Git
@@ -110,10 +110,10 @@ Add remotes for both applications:
 
 ```bash
 # Add server remote
-heroku git:remote -a facealert-api -r heroku-server
+heroku git:remote -a specter-api -r heroku-server
 
 # Add client remote  
-heroku git:remote -a facealert-frontend -r heroku-client
+heroku git:remote -a specter-frontend -r heroku-client
 ```
 
 #### Deploy applications
@@ -134,7 +134,7 @@ git push heroku-client `git subtree split --prefix=fs-dashboard/client HEAD`:ref
 
 #### Check server app
 
-Get the server domain from the DNS information (`heroku domains -a facealert-api`)
+Get the server domain from the DNS information (`heroku domains -a specter-api`)
 
 ```bash
 curl <server-domain/health>
@@ -143,12 +143,12 @@ curl <server-domain/health>
 For example
 
 ```bash
-curl https://facealert-api-0a992bc444dd.herokuapp.com/health
+curl https://specter-api-0a992bc444dd.herokuapp.com/health
 ```
 
 #### Check client app
 
-Get the server domain from the DNS information (`heroku domains -a facealert-frontend`)
+Get the server domain from the DNS information (`heroku domains -a specter-frontend`)
 
 ```bash
 curl <client-domain>
@@ -157,7 +157,7 @@ curl <client-domain>
 For example
 
 ```bash
-curl https://facealert-frontend-2f8031e1bcc2.herokuapp.com/
+curl https://specter-frontend-2f8031e1bcc2.herokuapp.com/
 ```
 
 #### DNS configuration

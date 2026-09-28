@@ -20,7 +20,7 @@ We need to set the following Secrets in the GitHub Repository:
 
 ```env
 HEROKU_API_KEY=your_heroku_api_key
-HEROKU_API_APP_NAME=facealert-api
-HEROKU_FRONTEND_APP_NAME=facealert-frontend
+HEROKU_API_APP_NAME=specter-api
+HEROKU_FRONTEND_APP_NAME=specter-frontend
 HEROKU_EMAIL=your-heroku-mail@example.com
 ```
