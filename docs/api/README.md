@@ -1,53 +1,16 @@
-# FS Dashboard API Documentation
+# Specter Dashboard API Documentation
 
 ## Overview
 
-This API provides authentication, user management, camera management, and Specter integration services for the Specter Dashboard system.
-
-## Available API Documentation
-
-- **[Camera Management API](./camera-api-documentation.md)** - Complete documentation for camera CRUD operations and user assignments
-- **[Authentication & User Management](#user-authentication)** - User registration, login, and role management
-
-## Quick Fixes
-
-- **[Heroku Deployment Issues](../deploy/HEROKU_TROUBLESHOOTING.md)** - Fix "Invalid credentials" and deployment failures
-
-## Postman Collections
-
-### Camera API Collection
-
-Import the following files into Postman to test the Camera Management API:
-
-1. **Collection**: `camera-api-postman-collection.json`
-   - Contains all camera management endpoints
-   - Includes authentication, CRUD operations, and user assignments
-   - Automatic token management with test scripts
-
-2. **Environment**: `camera-api-postman-environment.json`
-   - Pre-configured variables for testing
-   - Update `base_url`, `user_email`, and `user_password` as needed
-   - Auto-populated variables for created resources
-
-### How to Use Postman Collection
-
-1. Import both collection and environment files into Postman
-2. Select the "Camera API Environment" in Postman
-3. Update environment variables:
-   - `base_url`: Your server URL (default: http://localhost:5000)
-   - `user_email`: Valid operator or admin email
-   - `user_password`: Password for the user
-4. Run "Login" request first to get JWT token
-5. Use other requests to test camera functionality
-
-**Note**: The JWT token is automatically saved to environment variables after successful login.
+This API provides authentication, user management, and Specter integration services for the Specter Dashboard system. 
+Camera management and streaming are handled by Specter itself, with this API managing user sessions and permissions.
 
 ## Base URLs
 
 ### Development
 
 ```
-http://localhost:3000
+http://localhost:12113
 ```
 
 ### Production
@@ -80,7 +43,7 @@ Authorization: Bearer <your-jwt-token>
   "password": "string (min 6 chars)",
   "name": "string (required)",
   "email": "string (valid email)",
-  "role": "string (admin|manager|viewer) - optional, defaults to viewer"
+  "role": "string (admin|operator|viewer) - optional, defaults to viewer"
 }
 ```
 
@@ -204,19 +167,6 @@ Authorization: Bearer <your-jwt-token>
 }
 ```
 
-#### Server Root
-
-- **GET** `/`
-- **Description**: Welcome message
-- **Response**:
-
-```json
-{
-  "success": true,
-  "message": "Welcome to Specter Server!"
-}
-```
-
 ## Error Responses
 
 All endpoints may return error responses in the following format:
@@ -237,99 +187,6 @@ All endpoints may return error responses in the following format:
 - **404**: Not Found - Resource not found
 - **409**: Conflict - Resource already exists
 - **500**: Internal Server Error
-
-## Postman Collection
-
-Import the provided Postman collection and environment files:
-
-- `postman-collection.json` - API endpoints
-- `postman-environment.json` - Development environment (localhost:3000)
-- `postman-environment-production.json` - Production environment (api.specter.live)
-
-### Usage with Postman
-
-1. Import all files into Postman
-2. Select the appropriate environment:
-   - "FS Dashboard Development" for local testing
-   - "FS Dashboard Production" for production testing
-3. Use "Register User" or "Login User" to get a JWT token
-4. The token will be automatically set in the environment variables
-5. Use protected endpoints with the token
-
-### Testing Production
-
-To test the production API at `https://api.specter.live`:
-
-1. Select the "FS Dashboard Production" environment in Postman
-2. Use the same endpoints as in development
-3. Note: Production may have different data and rate limits
-
-## Example Usage
-
-### Development (localhost)
-
-### 1. Register a new user
-
-```bash
-curl -X POST http://localhost:3000/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "testuser",
-    "password": "Test123!",
-    "name": "Test User",
-    "email": "test@example.com"
-  }'
-```
-
-### 2. Login
-
-```bash
-curl -X POST http://localhost:3000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "testuser",
-    "password": "Test123!"
-  }'
-```
-
-### 3. Get profile (with token)
-
-```bash
-curl -H "Authorization: Bearer YOUR_TOKEN_HERE" \
-  http://localhost:3000/users/profile
-```
-
-### Production (api.specter.live)
-
-### 1. Test production health
-
-```bash
-curl https://api.specter.live/health
-```
-
-### 2. Register on production
-
-```bash
-curl -X POST https://api.specter.live/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "produser",
-    "password": "ProdTest123!",
-    "name": "Production User",
-    "email": "prod@example.com"
-  }'
-```
-
-### 3. Login on production
-
-```bash
-curl -X POST https://api.specter.live/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "produser",
-    "password": "ProdTest123!"
-  }'
-```
 
 ## Validation Rules
 
@@ -356,5 +213,5 @@ curl -X POST https://api.specter.live/auth/login \
 
 ### Role
 
-- Allowed values: "admin", "manager", "viewer"
+- Allowed values: "admin", "operator", "viewer"
 - Defaults to "viewer" if not specified
