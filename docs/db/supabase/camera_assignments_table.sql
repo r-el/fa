@@ -11,5 +11,8 @@ create table public.camera_assignments (
 
 create index idx_camera_assignments_user on public.camera_assignments (user_id);
 
+-- Disable RLS to match existing project conventions (see Disable_RLS_in Supabase.md)
+alter table public.camera_assignments disable row level security;
+
 -- The old public.cameras and public.camera_user_assignments tables are no longer read. Drop them
 -- only after confirming nothing else uses them.
